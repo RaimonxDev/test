@@ -1,0 +1,44 @@
+<mat-form-field appearance="legacy">
+  <mat-label>Choose Date Range</mat-label>
+  <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange">
+    <input matStartDate formControlName="start" placeholder="Start Date">
+    <input matEndDate formControlName="end" placeholder="End Date">
+  </mat-date-range-input>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-date-range-picker #picker></mat-date-range-picker>
+</mat-form-field>
+<button mat-button color= "primary" (click)="onFilterByDate()"  >filter by date</button>
+
+<h5>
+  Start: {{dateRange.value.start | date}} <br>
+  End: {{dateRange.value.end | date}}
+</h5>
+
+
+
+
+<div fxLayout="row" fxLayoutGap="1rem" class="space">
+  <div class="add-task-btn">
+    <button mat-flat-button color="primary" (click)="onAddEventClicked()">add event</button>
+    <!-- <a class="block" mat-button  routerLink="/filter"> filter by date</a>
+    <button style="margin-top: 1rem" mat-flat-button color="warn">filter by date</button> -->
+  </div>
+  
+  <div fxLayout="row wrap" fxLayoutGap="1rem grid"> 
+
+        <!-- edit to create an event -->
+    <app-edit-event *ngIf="addingEvent" (applyEditEvent)="onCreateEvent($event)" (cancelEditEvent)="onCancelCreate()"></app-edit-event>
+
+
+    <div *ngFor="let event of eventsFilterByDate">
+
+
+      <app-event *ngIf="event.id !== eventToEditId" [event]="event" ></app-event>
+      
+
+          <!-- edit to  edit an event -->
+      <app-edit-event *ngIf="event.id === eventToEditId" [event]="event" 
+      (applyEditEvent)="onApplyEdit($event)" (cancelEditEvent)="onCancelEdit()" ></app-edit-event>
+    
+
+</div>

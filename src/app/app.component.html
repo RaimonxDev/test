@@ -1,0 +1,19 @@
+
+
+<!-- router-outlet insted ot these 2 
+    
+    <app-login *ngIf = "username ===undefined"></app-login> -->
+<!-- <app-registration *ngIf = "username ===undefined"></app-registration> -->
+
+
+    
+<router-outlet *ngIf = "username ===undefined"></router-outlet>
+<app-header *ngIf = "username !==undefined" ></app-header>
+
+ <app-events *ngIf = "username !==undefined"></app-events>
+
+<!-- <app-filterevents *ngIf = "username !==undefined"></app-filterevents> -->
+
+
+
+<!-- <app-test></app-test> -->

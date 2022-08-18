@@ -1,0 +1,27 @@
+<mat-form-field appearance="legacy">
+    <mat-label>Choose Date Range</mat-label>
+    <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange">
+      <input matStartDate formControlName="start" placeholder="Start Date">
+      <input matEndDate formControlName="end" placeholder="End Date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  </mat-form-field>
+  <h5>
+    Start: {{dateRange.value.start | date}} <br>
+    End: {{dateRange.value.end | date}}
+  </h5>
+
+  <button mat-button color= "primary" (click)="onFilterByDate()">filter</button>
+
+<!--   filter by date range here-->
+<div style="margin-top: 2rem" fxLayout="row" fxLayoutGap="1rem" class="space">
+    <div fxLayout="row wrap" fxLayoutGap="1rem grid"> 
+        <div *ngFor="let event of events">
+
+            <app-event [event]="event" ></app-event>
+        </div>
+    </div>
+</div>
+
+

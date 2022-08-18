@@ -1,0 +1,61 @@
+{
+  "users": [
+    {
+      "id": 0,
+      "username": "hello",
+      "password": "123"
+    },
+    {
+      "username": "valeria",
+      "password": "123",
+      "id": 1
+    },
+    {
+      "username": "mela",
+      "password": "123",
+      "id": 2
+    },
+    {
+      "username": "user1",
+      "password": "123",
+      "id": 4
+    },
+    {
+      "username": "valeria",
+      "password": "123",
+      "id": 5
+    },
+    {
+      "username": "new",
+      "password": "123",
+      "id": 6
+    },
+    {
+      "username": "hello",
+      "password": "123",
+      "id": 7
+    },
+    {
+      "username": "0987",
+      "password": "0987",
+      "id": 8
+    },
+    {
+      "username": "olivia",
+      "password": "123",
+      "id": 9
+    }
+  ],
+  "events": [
+    {
+      "id": 2,
+      "userID": 1,
+      "username": "valeria",
+      "createdOn": "2022-08-17T21:49:03.874Z",
+      "eventTitle": "event 1",
+      "eventDate": "2022-08-27",
+      "eventDescrip": "event 1 descrip"
+    }
+  ],
+  "invites": []
+}

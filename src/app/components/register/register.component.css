@@ -1,0 +1,13 @@
+.centerhv {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+} 
+
+.block {
+    display: block;
+    width: 100%;
+    text-align:center;
+    margin-bottom: 1rem;
+}

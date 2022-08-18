@@ -1,0 +1,25 @@
+<div class="centerhv">
+  <form (ngSubmit)="onSubmit($event)">
+      <div layout="row">
+          <mat-form-field appearance="standard">
+              <input matInput placeholder="Username" name="username" [(ngModel)]="username">
+          </mat-form-field>
+      </div>
+      <div layout="row">
+          <mat-form-field appearance="standard">
+              <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password">
+          </mat-form-field>
+      </div>
+      <div layout="row">
+
+          <button class="block" type="submit" [disabled]="pending" mat-flat-button color="primary">Login</button>
+      </div>
+      <div layout="row">
+          <a class="block" mat-button  routerLink="/registration"> go to register</a>
+      </div>
+  </form>
+
+</div>
+
+<!-- $event: angular way to referencing that an event is being passed in html file 
+    // function onSubmit is being defined in the login.ts file -->

@@ -1,0 +1,15 @@
+<mat-card class="example-card">
+
+    <mat-card-title>invite to {{ titleFromEvent }}</mat-card-title>
+    <!-- <mat-card-subtitle>{{ dateFromEvent | date: 'fullDate'}}</mat-card-subtitle> -->
+    <mat-card-subtitle>{{ titleFromEvent }}</mat-card-subtitle>
+    <mat-card-subtitle>when: {{ dateFromEvent | date: 'fullDate' }}</mat-card-subtitle>
+    <mat-card-subtitle>owner: {{ userFromEvent}}</mat-card-subtitle>
+    <mat-card-content>
+      <p> invite</p>
+      <!-- <p> event owner: {{ username}}</p> -->
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="onUserInvited()">invite user</button>
+    </mat-card-actions>
+  </mat-card>
