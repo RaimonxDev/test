@@ -1,27 +1,29 @@
 <div class="centerhv">
-    <form (ngSubmit)="onUserReg($event)">
-        <div layout="row">
-            <mat-form-field appearance="standard">
-                <input matInput placeholder="Username" name="username" [(ngModel)]="username">
-            </mat-form-field>
-        </div>
-        <div layout="row">
-            <mat-form-field appearance="standard">
-                <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password">
-            </mat-form-field>
-        </div>
+  <form (ngSubmit)="onUserReg($event)">
+    <div layout="row">
+      <mat-form-field appearance="standard">
+        <input matInput placeholder="Username" name="username" [(ngModel)]="username">
+      </mat-form-field>
+    </div>
+    <div layout="row">
+      <mat-form-field appearance="standard">
+        <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password">
+      </mat-form-field>
+    </div>
 
-        <div layout="row">
-            <button class="block" type="submit" [disabled]="pending" mat-flat-button color="warn" >Register</button>
-        </div>
+    <div layout="row">
+      <button class="block" type="submit" [disabled]="pending" mat-flat-button color="warn">Register</button>
+    </div>
 
-        <div layout="row">
-            <a class="block" mat-button routerLink="/"> back to login</a>
-        </div>
-    </form>
+    <div layout="row">
+      <a class="block" mat-button routerLink="/"> back to login</a>
+    </div>
+  </form>
+
+  <p *ngIf="showMessage">Usuario registrado, por favor inicie session</p>
 </div>
 
 
 <!-- NGSubmit: enables dinging expression to onsubmit events -->
-<!-- [(ngModel)]  2 ways data binding between the property (username, password) and the input []:inputs  (): events are output--> 
+<!-- [(ngModel)]  2 ways data binding between the property (username, password) and the input []:inputs  (): events are output-->
 <!-- $event: event object-- prevents default behavior  -->

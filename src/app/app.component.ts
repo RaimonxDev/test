@@ -10,10 +10,10 @@ import { UIService } from './services/ui.service';
 export class AppComponent {
   username: string | undefined
 
-  constructor(private uiService: UIService){
+  constructor(private uiService: UIService) {
     // responding to the event
-    uiService.whenUsernameChanges().subscribe(username => this.username = username)
-    
+    // uiService.whenUsernameChanges().subscribe(username => this.username = username)
+
   }
 
 }

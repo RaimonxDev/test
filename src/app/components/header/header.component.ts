@@ -10,27 +10,27 @@ export class HeaderComponent implements OnInit {
   username: string = 'default'
 
 
-  constructor(private uiService:UIService) { 
+  constructor(private uiService: UIService) {
 
-    uiService.whenUsernameChanges().subscribe(username => {  // 3. from the uiservice, needs to bring the observable
-     
-      if (username !== undefined)
-        this.username = username
-      
-      
-  })
- 
-} 
+    // uiService.whenUsernameChanges().subscribe(username => {  // 3. from the uiservice, needs to bring the observable
+
+    //   if (username !== undefined)
+    //     this.username = username
+
+
+    // })
+
+  }
 
 
   ngOnInit(): void {
-  
-  this.uiService.dummyUsernameUpdate()   // 4. to update the username after it is initialized
-}
 
-onLogOut(): void{
-  this.uiService.logout()
-}
+    // this.uiService.dummyUsernameUpdate()   // 4. to update the username after it is initialized
+  }
+
+  onLogOut(): void {
+    this.uiService.logout()
+  }
 }
 
 
