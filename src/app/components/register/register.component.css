@@ -1,13 +1,18 @@
 .centerhv {
-    position:absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-} 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
 
 .block {
-    display: block;
-    width: 100%;
-    text-align:center;
-    margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: #dc2626;
+  font-weight: bold;
 }
