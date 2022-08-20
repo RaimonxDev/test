@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, switchMap, throwError, Subscription } from 'rxjs';
+import { Observable, Subject, switchMap, throwError, Subscription, tap } from 'rxjs';
 import { UsersService } from './users.service';
 import { User } from '../User';
 import { Router } from '@angular/router';
@@ -219,11 +219,11 @@ export class UIService {
     return this.usersService.checkExistUser(userInfo).pipe(
       switchMap((isExist) => {
         if (!isExist) {
-          this.refreshEvents();
           return this.usersService.postUserReg(userInfo.username, userInfo.password)
         }
         return throwError(() => new Error('registered user'))
-      })
+      }),
+      tap(_ => this.refreshEvents())
     )
     // .subscribe(user => {
     //   this.userSubject.next(user)
