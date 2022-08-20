@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UIService } from './services/ui.service';
 import { User } from './User';
+import { UsersService } from './services/users.service';
 
 
 @Component({
@@ -11,9 +11,9 @@ import { User } from './User';
 export class AppComponent {
   username: User | undefined
 
-  constructor(private uiService: UIService) {
+  constructor(userService: UsersService) {
     // responding to the event
-    uiService.user$.subscribe(username => this.username = username)
+    userService.user$.subscribe(username => this.username = username)
 
   }
 

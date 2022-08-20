@@ -12,23 +12,22 @@ export class LoginComponent implements OnInit {
   password: string = ""
   pending: boolean = false
 
-  constructor(private uiService:UIService) { }
+  constructor(private uiService: UIService) { }
 
   ngOnInit(): void {
   }
 
   // triggers the event
-  onSubmit(event: {preventDefault: () => void}): void {
-    event.preventDefault()
+  onSubmit(event: SubmitEvent): void {
     this.uiService.attemptLogin({
       username: this.username,
       password: this.password
     })
   }
 
-  
 
-  }
+
+}
 
 
 

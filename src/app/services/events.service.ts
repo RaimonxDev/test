@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Event } from 'src/app/Event'
 import { Invite } from 'src/app/Invite'
 
@@ -9,14 +9,14 @@ import { Invite } from 'src/app/Invite'
 })
 export class EventsService {
 
-  private apiUrlEvent = 'http://localhost:5000/eAvents';
+  private apiUrlEvent = 'http://localhost:5000/events';
   private apiUrlInvite = 'http://localhost:5000/invites';
 
 
   constructor(private http: HttpClient) { }
 
 
-  getEventsByUserId(userID: number): Observable<Event[]> {
+  getEventsByUserId(userID: number | undefined): Observable<Event[]> {
     return this.http.get<Event[]>(`${this.apiUrlEvent}?userID=${userID}`)
   }
 
@@ -25,7 +25,9 @@ export class EventsService {
   }
 
   postNewEvent(event: Event): Observable<undefined> {
-    return this.http.post<undefined>(this.apiUrlEvent, event)
+    return this.http.post<undefined>(this.apiUrlEvent, event).pipe(
+      tap(this.getEventsByUserId(event.userID).subscribe())
+    )
   }
 
   deleteEvent(id: number): Observable<Event> {

@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {Event} from 'src/app/Event'
+import { Event } from 'src/app/Event'
 import { UIService } from 'src/app/services/ui.service';
+import { EventsService } from '../../services/events.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { UsersService } from '../../services/users.service';
+import { User } from 'src/app/User';
 
 @Component({
   selector: 'app-edit-event',
@@ -9,45 +13,45 @@ import { UIService } from 'src/app/services/ui.service';
 })
 export class EditEventComponent implements OnInit {
 
-  // @Input has to be init or assigned undefined
-  @Input()  event: Event = {
+  // Form event
+  eventForm!: FormGroup;
+  user!: User | undefined;
+  constructor(
+    private eventService: EventsService,
+    private userService: UsersService) { }
+
+  ngOnInit(): void {
+
+    this.userService.user$.subscribe(user => this.user = user)
+
+    this.eventForm = new FormGroup({
+      eventTitle: new FormControl(''),  // empty to match the init value in the constructor
+      eventDescrip: new FormControl(''), // empty to match the init value in the constructor
+      eventDate: new FormControl(''),
+      username: new FormControl({ value: '', disabled: true }),
+    })
+
+  }
+
+  createEvent() {
+    const newEvent = {
+      ...this.eventForm.value,
+      userID: this.user?.id,
+      username: this.user?.username,
       createdOn: new Date,
-      eventDate: new Date,
-      eventTitle: '',
-      eventDescrip: '',
-      username: ''
+    }
+    this.eventService.postNewEvent(newEvent).subscribe(result => {
+      console.log(result);
+      this.eventForm.reset()
+      alert('Complete, Event Created')
+    });
   }
 
-  @Output() applyEditEvent: EventEmitter<Event> = new EventEmitter()
-  @Output() cancelEditEvent: EventEmitter<undefined> = new EventEmitter()
-
-  // var to store the value of eventDescrip when it changes
-  newEventTitle: string = ''  // empty to match the init value in the constructor
-  newDescrip: string = ''  // empty to match the init value in the constructor
-  newEventDate: Date = new Date
-  newUsername: string | undefined
-  
-  constructor(private uiService: UIService) { }
-
-  ngOnInit(): void { 
-    this.newEventTitle=this.event.eventTitle
-    this.newDescrip = this.event.eventDescrip  
-    this.newEventDate = this.event.eventDate
-    this.newUsername=this.event.username
+  cancelEvent() {
+    this.eventForm.reset();
   }
 
-onApplyEditEvent(): void{
-  //console.log(this.newEventTitle, this.newDescrip )
-  //this.uiService.applyCreateEventHappened(this.newEventTitle, this.newEventDate,this.newDescrip) // not informing the service, but the parent component
 
- this.applyEditEvent.emit
- ({...this.event, eventTitle: this.newEventTitle, eventDate: this.newEventDate, eventDescrip: this.newDescrip, username: this.newUsername} )  // need to send the content of the event
 
-}
 
-onCancelEditEvent(): void{
-  //this.uiService.cancelAddEvent()
-  this.cancelEditEvent.emit()
-
-}
 }

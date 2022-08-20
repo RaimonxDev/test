@@ -179,10 +179,10 @@ export class UIService {
   attemptLogin(userInfo: { username: string, password: string }): void {
     this.usersService.getUser(userInfo.username, userInfo.password).subscribe((maybeAUser: User | undefined) => {
       if (maybeAUser !== undefined) {
+        this._router.navigate(["/home"])
         this.usersService.setUser = maybeAUser
-        this.refreshEvents()
+        // this.refreshEvents()
       } else
-
         alert('username/password does not exit, need to register')
     })
   }

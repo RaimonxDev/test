@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { UIService } from 'src/app/services/ui.service';
 import { User } from '../../User';
 import { UsersService } from '../../services/users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -18,21 +18,19 @@ export class RegisterComponent implements OnInit {
 
   newuser: User[] = []
 
-  constructor(private uiService: UIService, private userService: UsersService) { // 2. let the ui service know that info will be sent
+  constructor(
+    private uiService: UIService,
+    private userService: UsersService,
+    private router: Router) { // 2. let the ui service know that info will be sent
   }
 
   ngOnInit(): void {
   }
 
-  onUserReg(event: { preventDefault: () => void }) {    // do not care what is coming as long as somenthis is
-    // event.preventDefault()
+  onUserReg(event: SubmitEvent) {    // do not care what is coming as long as somenthis is
     if (!this.username || !this.password) {
       alert('missing username or password')
       return
-    }
-    const userReg = {
-      username: this.username,
-      password: this.password
     }
     // registra al usuario
     this.uiService.attemptRegistration({
@@ -41,7 +39,8 @@ export class RegisterComponent implements OnInit {
     }).subscribe(
       {
         next: result => {
-          this.uiService.setUser = result
+          this.userService.setUser = result
+          this.router.navigate(['/home'])
         },
         error: error => {
           this.showMessage = true;

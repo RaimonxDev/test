@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FormsModule } from '@angular/forms';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule, Routes } from '@angular/router';
-import {MatCardModule} from '@angular/material/card';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 
@@ -28,13 +28,18 @@ import { EventsComponent } from './components/events/events.component';
 import { TestComponent } from './components/test/test.component';
 import { InviteComponent } from './components/invite/invite.component';
 import { FiltereventsComponent } from './components/filterevents/filterevents.component';
+import { HomeComponent } from './components/home/home.component';
+import { ListEventComponent } from './components/list-event/list-event.component';
 
 
 const appRoutes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: 'registration', component: RegisterComponent},
-  {path: 'filter', component: FiltereventsComponent}
-  ]
+
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'filter', component: FiltereventsComponent }
+]
 
 @NgModule({
   declarations: [
@@ -47,7 +52,9 @@ const appRoutes: Routes = [
     EventsComponent,
     TestComponent,
     InviteComponent,
-    FiltereventsComponent
+    FiltereventsComponent,
+    HomeComponent,
+    ListEventComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +73,7 @@ const appRoutes: Routes = [
     MatExpansionModule,
     ReactiveFormsModule,
     MatNativeDateModule
-    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

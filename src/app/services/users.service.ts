@@ -8,6 +8,8 @@ import { User } from '../User';
 })
 export class UsersService {
   private apiUrl = 'http://localhost:5000/Users';
+
+  // OBSERVABLE PRIVADO
   private userSubject = new BehaviorSubject<User | undefined>(undefined)
   public userName!: string | undefined;
   // Get User
@@ -48,13 +50,17 @@ export class UsersService {
 
 
   checkExistUser(value: User): Observable<boolean> {
+    // DEVUELVE TODOS LOS USUARIOS
     return this.http.get<User[]>(this.apiUrl).pipe(
       switchMap((users: User[]) => {
+        console.log(users);
         const check = users.find(user => user.username === value.username);
         return check ? of(true) : of(false);
       })
     );
   }
+
+
 
   getUserName(): Observable<User | undefined> {
     return this.http.get<User[]>(this.apiUrl)

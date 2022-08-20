@@ -1,26 +1,28 @@
-<mat-card class="event-card">
-    <mat-card-title>
-              <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="event title"[(ngModel)]= "newEventTitle"> {{event.eventTitle}}</textarea>
-          </mat-form-field>
-      {{event.eventTitle}}</mat-card-title>
-    <!-- <mat-card-subtitle>Created on: {{event.createdOn | date: 'fullDate'}}</mat-card-subtitle> -->
-    <mat-card-subtitle>
-        <mat-form-field class="example-full-width" appearance="fill">
-            <input matInput placeholder="event date" [(ngModel)]="newEventDate" type="date">
-          </mat-form-field>
+<mat-card [formGroup]="eventForm" class="event-card">
+  <mat-card-title>
 
-        <mat-form-field class="example-full-width" appearance="fill">
-            <textarea matInput placeholder="event description"[(ngModel)]="newDescrip">{{event.eventDescrip}}</textarea>
-          </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="event title" [formControlName]="'eventTitle'">
+    </mat-form-field>
+  </mat-card-title>
+  <!-- <mat-card-subtitle>Created on: {{event.createdOn | date: 'fullDate'}}</mat-card-subtitle> -->
+  <mat-card-subtitle>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <input matInput placeholder="event date" [formControlName]="'eventDate'" type="date">
+    </mat-form-field>
 
-          <mat-form-field class="example-full-width" appearance="fill">
-            <textarea matInput placeholder="username" [disabled]="true"[(ngModel)]="newUsername">{{event.username}}</textarea>
-          </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <textarea matInput placeholder="event description" [formControlName]="'eventDescrip'"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <textarea matInput placeholder="username" [formControlName]="'username'"></textarea>
+    </mat-form-field>
     <mat-card-actions>
-      <button mat-button (click)="onApplyEditEvent()">
-        Apply</button>
-      <button mat-button (click)="onCancelEditEvent()">
+      <button mat-flat-button color="primary" (click)="createEvent()">
+        Create</button>
+      <button mat-button color="accent" (click)="cancelEvent()">
         Cancel</button>
     </mat-card-actions>
-
+  </mat-card-subtitle>
+</mat-card>
