@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of, switchMap } from 'rxjs';
+import { map, Observable, of, ReplaySubject, skip, Subject, switchMap, BehaviorSubject } from 'rxjs';
 import { User } from '../User';
 
 @Injectable({
@@ -8,6 +8,16 @@ import { User } from '../User';
 })
 export class UsersService {
   private apiUrl = 'http://localhost:5000/Users';
+  private userSubject = new BehaviorSubject<User | undefined>(undefined)
+  public userName!: string | undefined;
+  // Get User
+  public get user$() {
+    return this.userSubject.asObservable()
+  }
+  // Update User
+  public set setUser(user: User) {
+    this.userSubject.next(user)
+  }
 
   constructor(private http: HttpClient) { }
 

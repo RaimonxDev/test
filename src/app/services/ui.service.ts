@@ -27,19 +27,12 @@ export class UIService {
   public events: Event[] = []
   public invites: Invite[] = []
   // User
-  private userSubject: Subject<User | undefined> = new Subject()
+
   private username: string | undefined
   private userID: number | undefined
 
-  // Get User
-  public get user$() {
-    return this.userSubject.asObservable()
-  }
-  // Update User
-  public set setUser(user: User) {
-    this.userSubject.next(user)
-  }
-  constructor(private usersService: UsersService,
+  constructor(
+    private usersService: UsersService,
     private eventsService: EventsService,
     private _router: Router) { }
 
@@ -186,7 +179,7 @@ export class UIService {
   attemptLogin(userInfo: { username: string, password: string }): void {
     this.usersService.getUser(userInfo.username, userInfo.password).subscribe((maybeAUser: User | undefined) => {
       if (maybeAUser !== undefined) {
-        this.userSubject.next(maybeAUser)
+        this.usersService.setUser = maybeAUser
         this.refreshEvents()
       } else
 
@@ -194,14 +187,14 @@ export class UIService {
     })
   }
 
-  whenUsernameChanges(): Observable<User | undefined> {
-    return this.userSubject.asObservable()
+  // whenUsernameChanges(): Observable<User | undefined> {
+  //   return this.userSubject.asObservable()
 
-  }
+  // }
 
   logout(): void {
-    this._router.navigate(["/"])   // to logout if logging thru registration
-    this.userSubject.next(undefined)
+    this._router.navigate(["/login"])   // to logout if logging thru registration
+    // this.usersService.setUser = {}
 
   }
 
@@ -213,12 +206,8 @@ export class UIService {
         }
         return throwError(() => new Error('registered user'))
       }),
-      tap(_ => this.refreshEvents())
+      // tap(_ => this.refreshEvents())
     )
-    // .subscribe(user => {
-    //   this.userSubject.next(user)
-    //   this.refreshEvents()
-    // })
   }
 
   getUserForInvite(userInfo: { username: string, password: string }) {
