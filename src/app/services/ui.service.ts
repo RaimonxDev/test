@@ -174,17 +174,7 @@ export class UIService {
     })
     this.editSubject.next(undefined)
   }
-  //   else
-  //     console.log('id not found, cannot edit this event')
-  // }
-
   //   -------login and registration  -----------------------------------------------------------------------------------
-
-  // dummyUsernameUpdate(): void {   // 5. try tu update the userSubject
-  //   this.userSubject.next(this.username)
-  // }
-
-  // this.events = this.events.filter(event => event.id !== id)
 
   private refreshEvents(): void {
     if (this.userID !== undefined)
